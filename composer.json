@@ -18,6 +18,7 @@
     ],
     "require" : {
         "kakserpom/phpdaemon": "dev-master",
+        "nizsheanez/yii2-json-rpc": "dev-master",
         "yiisoft/yii2": "dev-master"
     },
     "autoload": {
