@@ -2,16 +2,18 @@
 
 namespace nizsheanez\daemon;
 
+use Yii;
+
 class Response extends \yii\base\Response
 {
     protected $data;
 
     public function getMessage()
     {
-        if (\Yii::$app->request->callbackId) {
-            $this->data['callbackId'] = \Yii::$app->request->callbackId;
+        if (Yii::$app->request->callbackId) {
+            $this->data['callbackId'] = Yii::$app->request->callbackId;
         }
-        $this->data['route'] = \Yii::$app->request->route;
+        $this->data['route'] = Yii::$app->request->route;
 
         return json_encode($this->data);
     }

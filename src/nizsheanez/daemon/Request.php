@@ -2,45 +2,33 @@
 
 namespace nizsheanez\daemon;
 
+use nizsheanez\jsonRpc\Protocol;
+
 class Request extends \yii\base\Request
 {
-    protected $_route;
-    protected $_callback_id;
-    protected $_params;
+    /**
+     * @var \nizsheanez\jsonRpc\Protocol
+     */
+    protected $protocol;
 
     public function setMessage($message)
     {
-        \Yii::configure($this, json_decode($message, true));
+        $this->protocol = Protocol::server($message);
     }
 
-    public function setCallbackId($val)
+    public function getRequestId()
     {
-        $this->_callback_id = $val;
-    }
-
-    public function getCallbackId()
-    {
-        return $this->_callback_id;
-    }
-
-    public function setRoute($val)
-    {
-        $this->_route = $val;
+        return $this->protocol->getRequestId();
     }
 
     public function getRoute()
     {
-        return $this->_route;
-    }
-
-    public function setParams($val)
-    {
-        $this->_params = $val;
+        return $this->protocol->getMethod();
     }
 
     public function getParams()
     {
-        return $this->_params;
+        return $this->protocol->getParams();
     }
 
     /**
@@ -49,7 +37,7 @@ class Request extends \yii\base\Request
      */
     public function resolve()
     {
-        return array($this->_route, array());
+        return array($this->getRoute(), []);
     }
 
 }
