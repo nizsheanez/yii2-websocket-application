@@ -10,10 +10,10 @@ class Response extends \yii\base\Response
 
     public function getMessage()
     {
-        if (Yii::$app->request->callbackId) {
-            $this->data['callbackId'] = Yii::$app->request->callbackId;
+        if (Yii::$app->request->getRequestId()) {
+            $this->data['id'] = Yii::$app->request->getRequestId();
         }
-        $this->data['route'] = Yii::$app->request->route;
+        $this->data['method'] = Yii::$app->request->getRoute();
 
         return json_encode($this->data);
     }
@@ -30,7 +30,7 @@ class Response extends \yii\base\Response
     public function success($data)
     {
         $this->data = [
-            'status' => 'success',
+//            'status' => 'success',
             'params' => $data
         ];
     }
@@ -38,7 +38,7 @@ class Response extends \yii\base\Response
     public function fail($data)
     {
         $this->data = [
-            'status' => 'error',
+//            'status' => 'error',
             'error' => $data
         ];
     }
