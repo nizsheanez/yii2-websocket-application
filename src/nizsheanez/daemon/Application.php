@@ -17,9 +17,7 @@ class Application extends \yii\base\Application
         if ($result instanceof \yii\base\Response) {
             return $result;
         } else {
-            $response = $this->response;
-            $response->success($result);
-            return $response;
+            return $this->response;
         }
     }
 

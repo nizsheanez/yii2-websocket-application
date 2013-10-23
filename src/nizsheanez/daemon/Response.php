@@ -16,23 +16,12 @@ class Response extends \yii\base\Response
         $this->protocol = $protocol;
     }
 
-    public function getMessage()
-    {
-        if ($this->errorMessage) {
-            $data = $this->protocol->getResponse($this->result, $this->errorMessage);
-        } else {
-            $data = $this->protocol->getResponse($this->result);
-        }
-
-        return json_encode($data);
-    }
-
     public function send()
     {
-        if ($this->data['result']) {
-            file_put_contents('php://stdout', $this->getMessage());
+        if ($this->result) {
+            file_put_contents('php://stdout', $this->protocol->getMessage($this->result));
         } else {
-            file_put_contents('php://stderr', $this->getMessage());
+            file_put_contents('php://stderr', $this->protocol->getMessage($this->result, $this->errorMessage));
         }
     }
 
