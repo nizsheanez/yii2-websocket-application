@@ -2,25 +2,34 @@
 
 namespace nizsheanez\daemon;
 
+use nizsheanez\jsonRpc\Protocol;
 use Yii;
 
 class Response extends \yii\base\Response
 {
-    protected $data;
+    protected $result;
+    protected $errorMessage;
+    protected $protocol;
+
+    public function setProtocol($protocol)
+    {
+        $this->protocol = $protocol;
+    }
 
     public function getMessage()
     {
-        if (Yii::$app->request->getRequestId()) {
-            $this->data['id'] = Yii::$app->request->getRequestId();
+        if ($this->errorMessage) {
+            $data = $this->protocol->getResponse($this->result, $this->errorMessage);
+        } else {
+            $data = $this->protocol->getResponse($this->result);
         }
-        $this->data['method'] = Yii::$app->request->getRoute();
 
-        return json_encode($this->data);
+        return json_encode($data);
     }
 
     public function send()
     {
-        if ($this->data['status'] == 'success') {
+        if ($this->data['result']) {
             file_put_contents('php://stdout', $this->getMessage());
         } else {
             file_put_contents('php://stderr', $this->getMessage());
@@ -29,17 +38,11 @@ class Response extends \yii\base\Response
 
     public function success($data)
     {
-        $this->data = [
-//            'status' => 'success',
-            'params' => $data
-        ];
+        $this->result = $data;
     }
 
-    public function fail($data)
+    public function fail($errorMessage)
     {
-        $this->data = [
-//            'status' => 'error',
-            'error' => $data
-        ];
+        $this->errorMessage = $errorMessage;
     }
 }

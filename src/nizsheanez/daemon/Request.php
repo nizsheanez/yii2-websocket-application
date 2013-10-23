@@ -3,18 +3,23 @@
 namespace nizsheanez\daemon;
 
 use nizsheanez\jsonRpc\Protocol;
+use Yii;
 
 class Request extends \yii\base\Request
 {
     /**
-     * @var \nizsheanez\jsonRpc\Protocol
+     * @var Protocol
      */
     protected $protocol;
+    protected $message;
 
     public function setMessage($message)
     {
-        $this->protocol = Protocol::server($message);
+        $this->message = $message;
+        $this->protocol = Protocol::server($this->message);
+        Yii::$app->response->setProtocol($this->protocol);
     }
+
 
     public function getRequestId()
     {
