@@ -1,7 +1,7 @@
 <?php
 namespace nizsheanez\components\assetBundles;
 
-class WebSocketConnection extends yii\web\AssetBundle
+class WebSocketConnection extends \yii\web\AssetBundle
 {
     public $sourcePath = '@vendor/nizsheanez/yii2-websocket-application/src/nizsheanez';
     public $baseUrl = '@web';
@@ -10,6 +10,6 @@ class WebSocketConnection extends yii\web\AssetBundle
     );
 
     public $depends = array(
-        'nizsheanez\components\assetBundles',
+        'nizsheanez\components\assetBundles\PhpDaemon',
     );
 }
