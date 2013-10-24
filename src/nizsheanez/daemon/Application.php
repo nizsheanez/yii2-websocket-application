@@ -28,14 +28,14 @@ class Application extends \yii\base\Application
     public function registerCoreComponents()
     {
         parent::registerCoreComponents();
-        $this->setComponents(array(
-            'request' => array(
+        $this->setComponents([
+            'request' => [
                 'class' => 'nizsheanez\daemon\Request',
-            ),
-            'response' => array(
+            ],
+            'response' => [
                 'class' => 'nizsheanez\daemon\Response',
-            ),
-        ));
+            ],
+        ]);
     }
 
 }

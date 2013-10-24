@@ -11,14 +11,14 @@ class Application extends \nizsheanez\daemon\Application
     public function registerCoreComponents()
     {
         parent::registerCoreComponents();
-        $this->setComponents(array(
-            'request' => array(
+        $this->setComponents([
+            'request' => [
                 'class' => 'nizsheanez\websocket\Request',
-            ),
-            'response' => array(
+            ],
+            'response' => [
                 'class' => 'nizsheanez\websocket\Response',
-            ),
-        ));
+            ],
+        ]);
     }
 
 }

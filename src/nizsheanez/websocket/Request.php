@@ -10,6 +10,6 @@ class Request extends \nizsheanez\daemon\Request
      */
     public function resolve()
     {
-        return array($this->getRoute(), array());
+        return [$this->getRoute(), []];
     }
 }

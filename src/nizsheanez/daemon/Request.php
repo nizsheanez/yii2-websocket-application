@@ -20,7 +20,7 @@ class Request extends \yii\base\Request
      */
     public function resolve()
     {
-        return array($this->getRoute(), []);
+        return [$this->getRoute(), []];
     }
 
 }
