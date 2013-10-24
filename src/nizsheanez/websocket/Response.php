@@ -16,6 +16,6 @@ class Response extends \nizsheanez\daemon\Response
 
     public function send()
     {
-        $this->daemonRoute->client->sendFrame($this->protocol->getMessage($this->result), 'STRING');
+        $this->daemonRoute->client->sendFrame($this, 'STRING');
     }
 }

@@ -7,22 +7,11 @@ use Yii;
 
 class Response extends \yii\base\Response
 {
-    protected $result;
-    protected $errorMessage;
-    protected $protocol;
-
-    public function setProtocol($protocol)
-    {
-        $this->protocol = $protocol;
-    }
+    use \nizsheanez\jsonRpc\traits\Serializable;
 
     public function send()
     {
-        if ($this->result) {
-            file_put_contents('php://stdout', $this->protocol->getMessage($this->result));
-        } else {
-            file_put_contents('php://stderr', $this->protocol->getMessage($this->result, $this->errorMessage));
-        }
+        file_put_contents($this->isSuccessResponse() ? 'php://stdout' : 'php://stderr', $this);
     }
 
     public function success($data)
@@ -30,8 +19,8 @@ class Response extends \yii\base\Response
         $this->result = $data;
     }
 
-    public function fail($errorMessage)
+    public function fail($exception)
     {
-        $this->errorMessage = $errorMessage;
+        $this->exception = $exception;
     }
 }
