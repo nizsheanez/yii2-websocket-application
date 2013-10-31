@@ -1,6 +1,7 @@
 <?php
-
 namespace nizsheanez\daemon;
+
+use Exception;
 
 class Application extends \yii\base\Application
 {
@@ -13,12 +14,17 @@ class Application extends \yii\base\Application
     {
         list ($route, $params) = $request->resolve();
         $this->requestedRoute = $route;
-        $result = $this->runAction($route, $params);
-        if ($result instanceof \yii\base\Response) {
-            return $result;
-        } else {
-            return $this->response;
+        try {
+            $result = $this->runAction($route, $params);
+            if ($result instanceof \yii\base\Response) {
+                return $result;
+            } else {
+                $this->response->success($result);
+            }
+        } catch (Exception $e) {
+            $this->response->fail($e);
         }
+        return $this->response;
     }
 
     /**
@@ -28,14 +34,14 @@ class Application extends \yii\base\Application
     public function registerCoreComponents()
     {
         parent::registerCoreComponents();
-        $this->setComponents([
-            'request' => [
+        $this->setComponents(array(
+            'request' => array(
                 'class' => 'nizsheanez\daemon\Request',
-            ],
-            'response' => [
+            ),
+            'response' => array(
                 'class' => 'nizsheanez\daemon\Response',
-            ],
-        ]);
+            ),
+        ));
     }
 
 }
