@@ -19,7 +19,6 @@
     "require" : {
         "php": ">=5.4.0",
         "yiisoft/yii2": "dev-master",
-        "yiisoft/yii2-composer": "dev-master",
         "kakserpom/phpdaemon": "dev-master",
         "nizsheanez/yii2-json-rpc": "dev-master"
     },
