@@ -26,9 +26,14 @@ class Server extends \PHPDaemon\Core\AppInstance
 
     public function getRoute($path, $client)
     {
-        $route = new $this->routeClass($client, $this); // Создаем сессию
-        $route->id = uniqid(); // Назначаем ей уникальный ID
-        $appInstance->sessions[$route->id] = $route; //Сохраняем в массив
-        return $route;
+        switch ($path)
+        {
+            case '':
+                $route = new $this->routeClass($client, $this); // Создаем сессию
+                $route->id = uniqid(); // Назначаем ей уникальный ID
+                $this->sessions[$route->id] = $route; //Сохраняем в массив
+                return $route;
+        }
+
     }
 }
