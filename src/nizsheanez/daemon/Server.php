@@ -9,36 +9,26 @@ class Server extends \PHPDaemon\Core\AppInstance
     public $yiiDebug = false;
 
     public $routeClass = '\nizsheanez\daemon\Route';
-    public $yiiApplicationClass = '\nizsheanez\daemon\Application';
 
     public function onReady()
     {
+        $this->initRoutes();
+    }
+
+    public function initRoutes()
+    {
         $appInstance = $this;
-        \PHPDaemon\Servers\WebSocket\Pool::getInstance()->addRoute('', function ($client) use ($appInstance) {
-            $route = new $this->routeClass($client, $appInstance); // Создаем сессию
-            $route->id = uniqid(); // Назначаем ей уникальный ID
-            $appInstance->sessions[$route->id] = $route; //Сохраняем в массив
-            return $route;
+        $path = '';
+        \PHPDaemon\Servers\WebSocket\Pool::getInstance()->addRoute($path, function ($path) use ($appInstance) {
+            return $appInstance->getRoute($path, $client);
         });
-
-        $this->initYiiApplication();
     }
 
-    public function getYiiConfig()
+    public function getRoute($path, $client)
     {
-
+        $route = new $this->routeClass($client, $this); // Создаем сессию
+        $route->id = uniqid(); // Назначаем ей уникальный ID
+        $appInstance->sessions[$route->id] = $route; //Сохраняем в массив
+        return $route;
     }
-
-    public function initYiiApplication()
-    {
-        if ($this->yiiDebug) {
-            // comment out the following line to disable debug mode
-            defined('YII_DEBUG') or define('YII_DEBUG', true);
-        }
-
-        require(__DIR__ . '/../../../../../../vendor/yiisoft/yii2/yii/Yii.php');
-
-        return new $this->yiiApplicationClass($this->getYiiConfig());
-    }
-
 }
