@@ -19,7 +19,7 @@ class Server extends \PHPDaemon\Core\AppInstance
     {
         $appInstance = $this;
         $path = '';
-        \PHPDaemon\Servers\WebSocket\Pool::getInstance()->addRoute($path, function ($path) use ($appInstance) {
+        \PHPDaemon\Servers\WebSocket\Pool::getInstance()->addRoute($path, function ($client) use ($path, $appInstance) {
             return $appInstance->getRoute($path, $client);
         });
     }
