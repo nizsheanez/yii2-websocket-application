@@ -112,7 +112,7 @@ var AngularSocketDecorator = function (socket, $rootScope, alertService) {
     socket.send = function(route, params, callback, scope) {
         socket._send(route, params, function(data) {
             (scope ? scope : $rootScope).$apply(function() {
-                callback(data);
+                callback && callback(data);
             });
         });
         return socket;
