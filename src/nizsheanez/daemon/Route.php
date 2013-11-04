@@ -1,6 +1,8 @@
 <?php
 namespace nizsheanez\daemon;
 
+use Yii;
+
 class Route extends \PHPDaemon\WebSocket\Route
 {
     public $id; // Здесь храним ID сессии
