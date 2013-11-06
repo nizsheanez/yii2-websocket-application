@@ -1,5 +1,5 @@
 <?php
-namespace nizsheanez\daemon\assetBundles;
+namespace nizsheanez\websocket\assetBundles;
 
 class WebSocket extends \yii\web\AssetBundle
 {
@@ -10,6 +10,6 @@ class WebSocket extends \yii\web\AssetBundle
     ];
 
     public $depends = [
-        'nizsheanez\daemon\assetBundles\PhpDaemon',
+        'nizsheanez\websocket\assetBundles\PhpDaemon',
     ];
 }
