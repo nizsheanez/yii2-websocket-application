@@ -24,6 +24,5 @@
             "nizsheanez\\websocket\\": ""
         }
     },
-    "bin": ["bin/phpd"],
     "target-dir": "nizsheanez"
 }
