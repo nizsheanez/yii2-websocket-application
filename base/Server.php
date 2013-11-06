@@ -8,7 +8,7 @@ class Server extends \PHPDaemon\Core\AppInstance
 
     public $yiiDebug = false;
 
-    public $routeClass = '\nizsheanez\daemon\Route';
+    public $routeClass = '\nizsheanez\daemon\base\Route';
 
     public function onReady()
     {

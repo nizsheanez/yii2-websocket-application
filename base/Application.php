@@ -7,8 +7,8 @@ class Application extends \yii\base\Application
 {
     /**
      * Handles the specified request.
-     * @param \nizsheanez\daemon\Request $request the request to be handled
-     * @return \nizsheanez\daemon\Response the resulting response
+     * @param \nizsheanez\daemon\base\Request $request the request to be handled
+     * @return \nizsheanez\daemon\base\Response the resulting response
      */
     public function handleRequest($request)
     {
@@ -36,10 +36,10 @@ class Application extends \yii\base\Application
         parent::registerCoreComponents();
         $this->setComponents(array(
             'request' => array(
-                'class' => 'nizsheanez\daemon\Request',
+                'class' => 'nizsheanez\daemon\base\Request',
             ),
             'response' => array(
-                'class' => 'nizsheanez\daemon\Response',
+                'class' => 'nizsheanez\daemon\base\Response',
             ),
         ));
     }
