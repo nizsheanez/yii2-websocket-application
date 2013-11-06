@@ -1,5 +1,5 @@
 <?php
-namespace nizsheanez\components\assetBundles;
+namespace nizsheanez\daemon\assetBundles;
 
 use yii\web\AssetBundle;
 

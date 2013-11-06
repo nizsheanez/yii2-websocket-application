@@ -1,5 +1,5 @@
 <?php
-namespace nizsheanez\daemon;
+namespace nizsheanez\daemon\base;
 
 class Server extends \PHPDaemon\Core\AppInstance
 {

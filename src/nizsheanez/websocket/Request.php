@@ -1,8 +1,8 @@
 <?php
 
-namespace nizsheanez\websocket;
+namespace nizsheanez\daemon\websocket;
 
-class Request extends \nizsheanez\daemon\Request
+class Request extends \nizsheanez\daemon\base\Request
 {
     /**
      * Resolves the current request into a route and the associated parameters.
