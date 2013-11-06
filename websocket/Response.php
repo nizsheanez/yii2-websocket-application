@@ -1,8 +1,8 @@
 <?php
 
-namespace nizsheanez\daemon\websocket;
+namespace nizsheanez\websocket;
 
-class Response extends \nizsheanez\daemon\base\Response
+class Response extends \nizsheanez\daemon\Response
 {
     /**
      * @var \PHPDaemon\WebSocket\Route

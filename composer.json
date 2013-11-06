@@ -19,7 +19,10 @@
         "nizsheanez/yii2-json-rpc": "dev-master"
     },
     "autoload": {
-        "psr-0": { "nizsheanez\\daemon\\": "" }
+        "psr-0": {
+            "nizsheanez\\daemon\\": "",
+            "nizsheanez\\websocket\\": ""
+        }
     },
-    "target-dir": "nizsheanez/daemon"
+    "target-dir": "nizsheanez"
 }

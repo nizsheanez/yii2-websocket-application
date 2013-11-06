@@ -1,8 +1,8 @@
 <?php
-namespace nizsheanez\daemon\websocket;
+namespace nizsheanez\websocket;
 
-class Server extends \nizsheanez\daemon\base\Server
+class Server extends \nizsheanez\daemon\Server
 {
-    public $routeClass = '\nizsheanez\daemon\websocket\Route';
+    public $routeClass = '\nizsheanez\websocket\Route';
 }
 

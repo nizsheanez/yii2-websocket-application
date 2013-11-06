@@ -1,5 +1,5 @@
 <?php
-namespace nizsheanez\daemon\base;
+namespace nizsheanez\daemon;
 
 use Yii;
 

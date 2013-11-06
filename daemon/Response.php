@@ -1,6 +1,6 @@
 <?php
 
-namespace nizsheanez\daemon\base;
+namespace nizsheanez\daemon;
 
 use nizsheanez\jsonRpc\Protocol;
 use Yii;

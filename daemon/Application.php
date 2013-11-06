@@ -1,5 +1,5 @@
 <?php
-namespace nizsheanez\daemon\base;
+namespace nizsheanez\daemon;
 
 use Exception;
 
@@ -7,8 +7,8 @@ class Application extends \yii\base\Application
 {
     /**
      * Handles the specified request.
-     * @param \nizsheanez\daemon\base\Request $request the request to be handled
-     * @return \nizsheanez\daemon\base\Response the resulting response
+     * @param Request $request the request to be handled
+     * @return Response the resulting response
      */
     public function handleRequest($request)
     {
@@ -46,10 +46,10 @@ class Application extends \yii\base\Application
         parent::registerCoreComponents();
         $this->setComponents(array(
             'request' => array(
-                'class' => 'nizsheanez\daemon\base\Request',
+                'class' => 'nizsheanez\daemon\Request',
             ),
             'response' => array(
-                'class' => 'nizsheanez\daemon\base\Response',
+                'class' => 'nizsheanez\daemon\Response',
             ),
         ));
     }

@@ -1,5 +1,5 @@
 <?php
-namespace nizsheanez\daemon\base;
+namespace nizsheanez\daemon;
 
 class Server extends \PHPDaemon\Core\AppInstance
 {
@@ -8,7 +8,7 @@ class Server extends \PHPDaemon\Core\AppInstance
 
     public $yiiDebug = false;
 
-    public $routeClass = '\nizsheanez\daemon\base\Route';
+    public $routeClass = '\nizsheanez\daemon\Route';
 
     public function onReady()
     {

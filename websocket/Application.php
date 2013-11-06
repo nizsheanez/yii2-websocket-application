@@ -1,8 +1,8 @@
 <?php
 
-namespace nizsheanez\daemon\websocket;
+namespace nizsheanez\websocket;
 
-class Application extends \nizsheanez\daemon\base\Application
+class Application extends \nizsheanez\daemon\Application
 {
     /**
      * Registers the core application components.
@@ -13,10 +13,10 @@ class Application extends \nizsheanez\daemon\base\Application
         parent::registerCoreComponents();
         $this->setComponents([
             'request' => [
-                'class' => 'nizsheanez\daemon\websocket\Request',
+                'class' => 'nizsheanez\websocket\Request',
             ],
             'response' => [
-                'class' => 'nizsheanez\daemon\websocket\Response',
+                'class' => 'nizsheanez\websocket\Response',
             ],
         ]);
     }

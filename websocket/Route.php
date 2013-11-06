@@ -1,6 +1,6 @@
 <?php
-namespace nizsheanez\daemon\websocket;
+namespace nizsheanez\websocket;
 
-class Route extends \nizsheanez\daemon\base\Route
+class Route extends \nizsheanez\daemon\Route
 {
 }
