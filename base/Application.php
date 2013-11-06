@@ -28,6 +28,16 @@ class Application extends \yii\base\Application
     }
 
     /**
+     * Returns the response component.
+     * @return Response the response component
+     */
+    public function getResponse()
+    {
+        return $this->getComponent('response');
+    }
+
+
+    /**
      * Registers the core application components.
      * @see setComponents
      */
