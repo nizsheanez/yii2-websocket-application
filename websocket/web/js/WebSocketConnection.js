@@ -74,7 +74,7 @@ var JsonWebSocket = function (params) {
                     jsonrpc: '2.0',
                     id: callbackId,
                     method: method,
-                    params: params
+                    params: params ? params : {}
                 }));
             });
             return defer;
