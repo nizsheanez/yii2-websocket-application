@@ -1,9 +1,10 @@
 <?php
 namespace nizsheanez\daemon;
 
+use Yii;
 use Exception;
 
-class Application extends \yii\base\Application
+class Application extends \yii\web\Application
 {
     /**
      * Handles the specified request.
@@ -12,9 +13,12 @@ class Application extends \yii\base\Application
      */
     public function handleRequest($request)
     {
+        Yii::setAlias('@webroot', dirname($request->getScriptFile()));
+        Yii::setAlias('@web', $request->getBaseUrl());
         list ($route, $params) = $request->resolve();
-        $this->requestedRoute = $route;
         try {
+            Yii::trace("Route requested: '$route'", __METHOD__);
+            $this->requestedRoute = $route;
             $result = $this->runAction($route, $params);
             if ($result instanceof \yii\base\Response) {
                 return $result;

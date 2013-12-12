@@ -5,7 +5,7 @@ namespace nizsheanez\daemon;
 use nizsheanez\jsonRpc\Protocol;
 use Yii;
 
-class Response extends \yii\base\Response
+class Response extends \yii\web\Response
 {
     use \nizsheanez\jsonRpc\traits\Serializable;
 
