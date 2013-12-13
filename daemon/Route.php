@@ -13,7 +13,9 @@ class Route extends \PHPDaemon\WebSocket\Route
         Yii::$app->request->setRequestMessage($message);
         Yii::$app->response->setRequestMessage($message);
         Yii::$app->response->setDaemonRoute($this);
+        Yii::$app->session->open();
         Yii::$app->run();
+        Yii::$app->session->close(); //otherwise - sessions on files will lock forever
     }
 
     // Этот метод срабатывает при закрытии соединения клиентом
