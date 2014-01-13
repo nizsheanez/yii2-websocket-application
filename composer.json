@@ -1,6 +1,6 @@
 {
     "name": "nizsheanez/yii2-websocket-application",
-    "description": "WebSocket yii2 Application and Request/Response classes, on simple JsonRpc protocol",
+    "description": "WebSocket yii2 Application and Request/Response classes, and wam protocol implementation protocol",
     "type": "library",
     "keywords": ["yii", "yii2", "websocket"],
     "license": "BSD-3-Clause",
@@ -20,8 +20,7 @@
     "require" : {
         "php": ">=5.4.0",
         "yiisoft/yii2": "dev-master",
-        "kakserpom/phpdaemon": "dev-master",
-        "nizsheanez/yii2-json-rpc": "dev-master"
+        "kakserpom/phpdaemon": "dev-master"
     },
     "autoload": {
         "psr-4": {
