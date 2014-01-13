@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
     "name": "nizsheanez/yii2-websocket-application",
     "description": "WebSocket yii2 Application and Request/Response classes, on simple JsonRpc protocol",
@@ -27,3 +28,33 @@
         "psr-0": { "nizsheanez": "src" }
     }
 }
+=======
+{
+    "name": "nizsheanez/yii2-daemon",
+    "description": "WebSocket server and Daemons yii2 Application and Request/Response classes, on simple JsonRpc protocol",
+    "type": "yii2-extension",
+    "keywords": ["yii", "yii2", "asset", "converter", "less", "sass", "phamlp"],
+    "license": "BSD-3-Clause",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Alex Sharov",
+            "email": "www.pismeco@gmail.com",
+            "role": "Author"
+        }
+    ],
+    "require" : {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "dev-master",
+        "kakserpom/phpdaemon": "dev-master",
+        "nizsheanez/yii2-json-rpc": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "nizsheanez\\daemon\\": "",
+            "nizsheanez\\websocket\\": ""
+        }
+    },
+    "target-dir": "nizsheanez"
+}
+>>>>>>> 677f40185b005becb986da69834742c728791024
