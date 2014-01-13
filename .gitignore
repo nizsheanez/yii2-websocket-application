@@ -1,8 +1,2 @@
-<<<<<<< HEAD
-/composer.lock
+composer.lock
 .idea
-=======
-/composer.lock
-.idea
->>>>>>> 677f40185b005becb986da69834742c728791024
-/vendor

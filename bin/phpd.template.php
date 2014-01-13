@@ -8,7 +8,7 @@ require __DIR__ . '/../vendor/autoload.php';
 require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 //set aliaces, app will create when it will need
-$configFile = require realpath(__DIR__ . '/../frontend/config/main.php');
+require realpath(__DIR__ . '/../frontend/config/main.php');
 
 $configFile = __DIR__ . '/../common/config/phpd.conf';
 require __DIR__ . '/../vendor/kakserpom/phpdaemon/bin/phpd';

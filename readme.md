@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-###Requirements
-
 YII 2.0
 PhpDaemon
 =======
@@ -15,4 +12,3 @@ Using Json-RPC 2.0 protocol for data transfer
 YII 2.0
 PhpDaemon
 
->>>>>>> 677f40185b005becb986da69834742c728791024
