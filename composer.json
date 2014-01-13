@@ -1,0 +1,29 @@
+{
+    "name": "nizsheanez/yii2-websocket-application",
+    "description": "WebSocket yii2 Application and Request/Response classes, on simple JsonRpc protocol",
+    "type": "library",
+    "keywords": ["yii", "yii2", "asset", "converter", "less", "sass", "phamlp"],
+    "license": "BSD-3-Clause",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Michel Bobillier",
+            "homepage": "http://blog.athos99.com",
+            "role": "Author"
+        },
+        {
+            "name": "Alex Sharov",
+            "email": "www.pismeco@gmail.com",
+            "role": "Fork Author"
+        }
+    ],
+    "require" : {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "dev-master",
+        "kakserpom/phpdaemon": "dev-master",
+        "nizsheanez/yii2-json-rpc": "dev-master"
+    },
+    "autoload": {
+        "psr-0": { "nizsheanez": "src" }
+    }
+}
