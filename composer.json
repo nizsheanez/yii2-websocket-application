@@ -1,8 +1,8 @@
 {
-    "name": "nizsheanez/yii2-websocket-application",
+    "name": "nizsheanez/yii2-wamp-application",
     "description": "WebSocket yii2 Application and Request/Response classes, and wam protocol implementation protocol",
     "type": "library",
-    "keywords": ["yii", "yii2", "websocket"],
+    "keywords": ["yii", "yii2", "websocket", "wamp"],
     "license": "BSD-3-Clause",
     "minimum-stability": "dev",
     "authors": [
@@ -24,7 +24,7 @@
     },
     "autoload": {
         "psr-4": {
-            "nizsheanez\\ws\\": "src"
+            "nizsheanez\\wamp\\": "src"
         }
     }
 }
