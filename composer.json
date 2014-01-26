@@ -24,7 +24,8 @@
     },
     "autoload": {
         "psr-4": {
-            "nizsheanez\\wamp\\": "src"
+            "nizsheanez\\websocket\\": "src/websocket",
+            "nizsheanez\\wamp\\": "src/wamp"
         }
     }
 }
