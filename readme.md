@@ -1,11 +1,11 @@
 YII 2.0
 PhpDaemon
 =======
-Components for creating WebSocket based applications
+Components for creating WebSocket based applications,
 
-Request/Response/Application and Client-side library.
+Request/Response/Server and Client-side library.
 
-Using Json-RPC 2.0 protocol for data transfer
+used Wamp protocol
 
 ###Requirements
 
