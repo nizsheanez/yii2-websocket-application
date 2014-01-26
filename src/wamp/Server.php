@@ -1,7 +1,7 @@
 <?php
 namespace nizsheanez\wamp;
 
-class Server extends \nizsheanez\wevsocket\Server
+class Server extends \nizsheanez\websocket\Server
 {
     public $routeClass = '\nizsheanez\wamp\Route';
     public $pubsub;
