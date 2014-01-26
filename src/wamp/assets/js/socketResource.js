@@ -43,6 +43,7 @@ angular.module('eg.components', []).service('server', function () {
         'retryDelay': 1000
     });
 
+    sess.prefix = prefix;
     return sess;
 });
 
@@ -102,7 +103,7 @@ angular.module('eg.components').factory('$socketResource', ['server', function (
 
     Route.prototype = {
         url: function (action) {
-            return prefix + this.controller + '/' + action;
+            return server.prefix + this.controller + '/' + action;
         }
     };
 
