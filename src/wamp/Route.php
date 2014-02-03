@@ -8,10 +8,26 @@ class Route extends \PHPDaemon\WebSocket\Route
 {
     public $id; // id of connection session
 
-    public $prefixes = array();
+    protected $prefixes = array();
 
     public $yiiAppConfig;
     public $yiiAppClass;
+
+    public function setPrefix(string $prefix, string $value) {
+        $this->prefixes[$prefix] = $value;
+    }
+    public function getPrefix(string $prefix) {
+        if (array_key_exists($prefix, $this->prefixes)) {
+            return $this->prefixes[$prefix];
+        } else {
+            return false;
+        }
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @var \nizsheanez\wamp\Server
@@ -69,7 +85,7 @@ class Route extends \PHPDaemon\WebSocket\Route
         Yii::$app->request->setUrl(str_replace($this->client->server['HTTP_ORIGIN'], '', $topic));
         Daemon::log(Yii::$app->request->getUrl());
 
-        $_GET = $params;
+        Yii::$app->request->setQueryParams($params);
         try {
             Yii::$app->run();
         } catch (\Exception $e) {
@@ -78,12 +94,6 @@ class Route extends \PHPDaemon\WebSocket\Route
             return true;
         }
         $this->wamp->result($id, Yii::$app->response->data);
-    }
-
-
-    public function getUri($uri)
-    {
-        return (array_key_exists($uri, $this->prefixes) ? $this->prefixes[$uri] : $uri);
     }
 
     public function subscribe($id)

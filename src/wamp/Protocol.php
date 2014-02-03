@@ -15,28 +15,29 @@ class Protocol
     const MSG_PUBLISH = 7;
     const MSG_EVENT = 8;
 
-    protected $route;
+    protected $context;
 
     /**
      * Constructor
      *
-     * @param \nizsheanez\wamp\Route $route
+     * @param ContextInterface $context
      *
      * @return void
      */
-    public function __construct($route)
+    public function __construct(ContextInterface $context)
     {
-        $this->route = $route;
+        $this->context = $context;
     }
 
     public function onOpen()
     {
-        $this->route->send(json_encode(array(
+        $message = [
             static::MSG_WELCOME,
-            $this->route->id,
+            $this->context->getId(),
             1,
             'yii2-websocket-application'
-        )));
+        ];
+        $this->send($message);
     }
 
     /**
@@ -49,18 +50,18 @@ class Protocol
      */
     public function callError($id, $errorUri, $desc = '', $details = null)
     {
-        $data = array(
+        $data = [
             static::MSG_CALL_ERROR,
             $id,
             $errorUri,
             $desc
-        );
+        ];
 
         if (null !== $details) {
             $data[] = $details;
         }
 
-        return $this->route->send(json_encode($data));
+        return $this->send($data);
     }
 
     /**
@@ -69,11 +70,12 @@ class Protocol
      */
     public function event($topic, $msg)
     {
-        return $this->route->send(json_encode(array(
+        $message = [
             static::MSG_EVENT,
             (string)$topic,
             $msg
-        )));
+        ];
+        return $this->send($message);
     }
 
     /**
@@ -82,13 +84,14 @@ class Protocol
      */
     public function prefix($curie, $uri)
     {
-        $this->route->prefixes[$curie] = (string)$uri;
+        $this->context->setPrefix($curie, (string)$uri);
 
-        return $this->route->send(json_encode(array(
+        $message  = [
             static::MSG_PREFIX,
             $curie,
             (string)$uri
-        )));
+        ];
+        return $this->send($message);
     }
 
     /**
@@ -100,7 +103,8 @@ class Protocol
      */
     public function getUri($uri)
     {
-        return (array_key_exists($uri, $this->route->prefixes) ? $this->route->prefixes[$uri] : $uri);
+        $prefix = $this->context->getPrefix($uri);
+        return ($prefix ? $prefix : $uri);
     }
 
     /**
@@ -120,7 +124,7 @@ class Protocol
 
         switch ($json[0]) {
             case static::MSG_PREFIX:
-                $this->route->prefixes[$json[1]] = $json[2];
+                $this->context->setPrefix($json[1], $json[2]);
                 break;
 
             case static::MSG_CALL:
@@ -132,30 +136,30 @@ class Protocol
                     $json = $json[0];
                 }
 
-                $this->route->call($callID, $procURI, $json);
+                $this->context->call($callID, $procURI, $json);
                 break;
 
             case static::MSG_SUBSCRIBE:
-                $this->route->subscribe($this->route->getUri($json[1]));
+                $this->context->subscribe($this->getUri($json[1]));
                 break;
 
             case static::MSG_UNSUBSCRIBE:
-                $this->route->subscribe($this->route->getUri($json[1]));
+                $this->context->unsubscribe($this->getUri($json[1]));
                 break;
 
             case static::MSG_PUBLISH:
                 $exclude = (array_key_exists(3, $json) ? $json[3] : null);
                 if (!is_array($exclude)) {
                     if (true === (boolean)$exclude) {
-                        $exclude = array($this->route->id);
+                        $exclude = [$this->context->getId()];
                     } else {
-                        $exclude = array();
+                        $exclude = [];
                     }
                 }
 
-                $eligible = (array_key_exists(4, $json) ? $json[4] : array());
+                $eligible = (array_key_exists(4, $json) ? $json[4] : []);
 
-                $this->route->publish($this->route->getUri($json[1]), $json[2], $exclude, $eligible);
+                $this->context->publish($this->getUri($json[1]), $json[2], $exclude, $eligible);
                 break;
 
             default:
@@ -165,12 +169,29 @@ class Protocol
 
     public function result($callId, $data)
     {
-        return $this->route->send(json_encode([static::MSG_CALL_RESULT, $callId, $data]));
+        $message = [static::MSG_CALL_RESULT, $callId, $data];
+        return $this->context->send(json_encode($message));
     }
 
     public function error($callId, $data)
     {
-        return $this->route->send(json_encode([static::MSG_CALL_ERROR, $callId, $data]));
+        $message = [static::MSG_CALL_ERROR, $callId, $data];
+        return $this->send($message);
+    }
+
+    public function send($message)
+    {
+        return $this->context->send($this->serialize($message));
+    }
+
+    public function serialize($message)
+    {
+        return json_encode($message);
+    }
+
+    public function unserialize($message)
+    {
+        return json_decode($message);
     }
 
 }

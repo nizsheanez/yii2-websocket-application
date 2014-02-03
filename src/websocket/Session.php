@@ -14,7 +14,6 @@ class Session extends \yii\web\Session
      */
     public function open()
     {
-        $this->updateFlashCounters();
     }
 
 }
