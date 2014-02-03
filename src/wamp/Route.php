@@ -4,7 +4,7 @@ namespace nizsheanez\wamp;
 use PHPDaemon\Core\Daemon;
 use Yii;
 
-class Route extends \PHPDaemon\WebSocket\Route
+class Route extends \PHPDaemon\WebSocket\Route implements ContextInterface
 {
     public $id; // id of connection session
 
