@@ -25,6 +25,7 @@ class Route extends \PHPDaemon\WebSocket\Route implements ContextInterface
 
     public function onHandshake()
     {
+        $this->client->onSessionStart(function ($event) {}); //temporary fix of non started sessions
         $wamp = $this->wamp = new Protocol($this);
         $wamp->onOpen();
     }
