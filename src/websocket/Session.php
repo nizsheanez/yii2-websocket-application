@@ -1,5 +1,5 @@
 <?php
-namespace common\components;
+namespace nizsheanez\websocket;
 
 use PHPDaemon\Core\Daemon;
 

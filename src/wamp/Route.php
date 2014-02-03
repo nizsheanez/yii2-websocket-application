@@ -13,22 +13,6 @@ class Route extends \PHPDaemon\WebSocket\Route implements ContextInterface
     public $yiiAppConfig;
     public $yiiAppClass;
 
-    public function setPrefix(string $prefix, string $value) {
-        $this->prefixes[$prefix] = $value;
-    }
-    public function getPrefix(string $prefix) {
-        if (array_key_exists($prefix, $this->prefixes)) {
-            return $this->prefixes[$prefix];
-        } else {
-            return false;
-        }
-    }
-
-    public function getId()
-    {
-        return $this->id;
-    }
-
     /**
      * @var \nizsheanez\wamp\Server
      */
@@ -61,7 +45,7 @@ class Route extends \PHPDaemon\WebSocket\Route implements ContextInterface
     public function beforeOnMessage()
     {
         $config = require Yii::getAlias($this->yiiAppConfig);
-        $class = $this->yiiAppClass;
+        $class  = $this->yiiAppClass;
         new $class($config);
     }
 
@@ -79,6 +63,35 @@ class Route extends \PHPDaemon\WebSocket\Route implements ContextInterface
         }
         Yii::$app = null;
     }
+
+
+    public function onFinish()
+    {
+        $this->appInstance->pubsub->unsubFromAll($this);
+
+        return $this;
+    }
+
+
+    public function setPrefix($prefix, $value)
+    {
+        $this->prefixes[$prefix] = $value;
+    }
+
+    public function getPrefix($prefix)
+    {
+        if (array_key_exists($prefix, $this->prefixes)) {
+            return $this->prefixes[$prefix];
+        } else {
+            return false;
+        }
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
 
     public function call($id, $topic, array $params)
     {
@@ -107,9 +120,9 @@ class Route extends \PHPDaemon\WebSocket\Route implements ContextInterface
         $this->appInstance->pubsub->unsub($id, $this);
     }
 
-    public function publish($id, $event, array $exclude, array $eligible)
+    public function publish($uri, $event, $exclude, $eligible)
     {
-        $this->appInstance->pubsub->pub($id, $event);
+        $this->appInstance->pubsub->pub($uri, $event);
     }
 
     public function onClose()
@@ -125,13 +138,6 @@ class Route extends \PHPDaemon\WebSocket\Route implements ContextInterface
     public function send($message)
     {
         $this->client->sendFrame($message, 'STRING');
-
-        return $this;
-    }
-
-    public function onFinish()
-    {
-        $this->appInstance->pubsub->unsubFromAll($this);
 
         return $this;
     }
